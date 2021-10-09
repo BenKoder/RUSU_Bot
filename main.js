@@ -30,8 +30,10 @@ client.once('ready', () => {
         await member.roles.add(verifiedID)
         member.send ("You have been successfully verified!")
     })
-
-    app.listen(8080)
+    app.get("/", (req,res)=>{
+        res.send("Server is running!")
+    })
+    app.listen(80)
 });
 
 // Login to Discord with your client's token
