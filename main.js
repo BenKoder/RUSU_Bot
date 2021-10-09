@@ -33,7 +33,7 @@ client.once('ready', () => {
     app.get("/", (req,res)=>{
         res.send("Server is running!")
     })
-    app.listen(80)
+    app.listen(8080)
 });
 
 // Login to Discord with your client's token
