@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('verify')
-        .setDescription('get the verified role'),
+        .setDescription('Get the verified role'),
     async execute(interaction) {
         await interaction.reply({content: 'Complete this form to get verified: https://forms.office.com/r/UBKCGPwfEF',
                                  ephemeral: true});
