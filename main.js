@@ -1,5 +1,5 @@
 const { Client, Intents } = require('discord.js');
-const { token, guildID, verifiedID } = require('./config.json');
+const { token, guildID, verifiedID, verifiedAuthValue } = require('./config.json');
 const express = require('express')
 const app = express()
 
@@ -17,6 +17,10 @@ client.once('ready', () => {
 
 //Accepts post requests to the /verify URL
     app.post('/verify', async (req, res) => {
+        if (req.headers.authorization !== `Bearer ${verifiedAuthValue}`) {
+            res.status(401).send('Unauthorised')
+            return
+        }
         console.log(req.body)
         res.end()
         const guild = await client.guilds.fetch(guildID)
@@ -32,3 +36,4 @@ client.once('ready', () => {
 
 // Login to Discord with your client's token
 client.login(token);
+//aeiufbsigubg
