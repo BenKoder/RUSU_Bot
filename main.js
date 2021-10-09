@@ -11,11 +11,11 @@ const client = new Client({ intents: myIntents });
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
     console.log('Ready!');
-
+    client.User.setGame("verification");
     //Lets the web server parse JSON files
     app.use(express.json())
 
-//Accepts post requests to the /verify URL
+    //Accepts post requests to the /verify URL
     app.post('/verify', async (req, res) => {
         if (req.headers.authorization !== `Bearer ${verifiedAuthValue}`) {
             res.status(401).send('Unauthorised')
@@ -31,7 +31,7 @@ client.once('ready', () => {
         member.send ("You have been successfully verified!")
     })
     app.get("/", (req,res)=>{
-        res.send("Server is running!")
+        res.send("For students, by Koder!")
     })
     app.listen(8080)
 });
