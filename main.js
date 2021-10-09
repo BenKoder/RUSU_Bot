@@ -31,9 +31,9 @@ client.once('ready', () => {
         member.send ("You have been successfully verified!")
     })
     app.get("/", (req,res)=>{
-        res.send("Server is running!")
+        res.send("For students, by Koder!")
     })
-    app.listen(80)
+    app.listen(8080)
 });
 
 // Login to Discord with your client's token
