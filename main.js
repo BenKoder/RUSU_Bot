@@ -11,7 +11,7 @@ const client = new Client({ intents: myIntents });
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
     console.log('Ready!');
-    client.User.setGame("verification");
+    client.user.setActivity('for verifications', { type: 'LISTENING' });
     //Lets the web server parse JSON files
     app.use(express.json())
 
@@ -38,4 +38,3 @@ client.once('ready', () => {
 
 // Login to Discord with your client's token
 client.login(token);
-//aeiufbsigubg
