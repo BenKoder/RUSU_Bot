@@ -23,12 +23,18 @@ client.once('ready', () => {
         }
         console.log(req.body)
         res.end()
+
+        //Search all members within a guild
         const guild = await client.guilds.fetch(guildID)
-        const allMembers = await guild.members.fetch({cache: false})
+        const allMembers = await guild.members.fetch()
+
+        //Checks all members for one that shares the same username as the request
         const member = allMembers.find(member => member.user.tag === req.body.discordtag)
         if(!member) return
+
+        //Sets role for found member
         await member.roles.add(verifiedID)
-        member.send ("You have been successfully verified!")
+        await member.send("You have been successfully verified!")
     })
     app.get("/", (req,res)=>{
         res.send("For students, by Koder!")
