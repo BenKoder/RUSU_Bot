@@ -1,8 +1,8 @@
 const fs = require('fs'); //Nodes native file system
 const { Client, Collection, Intents } = require('discord.js');
 const { token, guildID, verifiedID, verifiedAuthValue } = require('./config.json');
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 // Create a new client instance
 const myIntents = new Intents();
@@ -23,37 +23,38 @@ for (const file of commandFiles) {
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
-    console.log('Ready!');
     client.user.setActivity('/verify', { type: 'LISTENING' });
     //Lets the web server parse JSON files
-    app.use(express.json())
+    app.use(express.json());
 
     //Accepts post requests to the /verify URL
     app.post('/verify', async (req, res) => {
         if (req.headers.authorization !== `Bearer ${verifiedAuthValue}`) {
-            res.status(401).send('Unauthorised')
-            return
+            res.status(401).send('Unauthorised');
+            return;
         }
-        console.log(req.body)
-        res.end()
+        console.log(req.body);
+        res.end();
 
         //Search all members within a guild
-        const guild = await client.guilds.fetch(guildID)
-        const allMembers = await guild.members.fetch()
+        const guild = await client.guilds.fetch(guildID);
+        const allMembers = await guild.members.fetch();
 
         //Checks all members for one that shares the same username as the request
-        const member = allMembers.find(member => member.user.tag === req.body.discordtag)
-        if(!member) return
+        const member = allMembers.find(member => member.user.tag === req.body.discordtag);
+        if(!member) return;
 
         //Sets role for found member
-        await member.roles.add(verifiedID)
-        await member.send("You have been successfully verified!")
+        await member.roles.add(verifiedID);
+        await member.send("You have been successfully verified!");
     })
     //Sends message to anyone visiting the VM IP
     app.get("/", (req,res)=>{
-        res.send("For students, by Koder!")
+        res.send("For students, by Koder!");
     })
-    app.listen(8080)
+    app.listen(8080);
+
+    console.log('Ready!');
 });
 
 client.on('interactionCreate', async interaction => {

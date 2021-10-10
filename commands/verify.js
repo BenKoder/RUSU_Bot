@@ -5,7 +5,6 @@ module.exports = {
         .setName('verify')
         .setDescription('Get the verified role'),
     async execute(interaction) {
-        await interaction.reply({content: 'Complete this form to get verified: https://forms.office.com/r/UBKCGPwfEF',
-                                 ephemeral: true});
+        await interaction.reply({content: 'Complete this form to get verified: https://forms.office.com/r/UBKCGPwfEF', ephemeral: true});
     },
 };
